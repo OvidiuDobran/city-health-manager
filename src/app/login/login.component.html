@@ -1,0 +1,5 @@
+<h1>City Health Manager</h1>
+
+<app-city-login *ngIf="loginFormIndex==0" [cities]="cities" (next)="doNext($event)"></app-city-login>
+<app-user-login *ngIf="loginFormIndex==1" (login)="login($event)" (back)="doBack($event)" [displayError]="loginFailed">
+</app-user-login>

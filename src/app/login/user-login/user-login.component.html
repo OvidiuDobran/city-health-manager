@@ -1,0 +1,16 @@
+<div>
+    <form>
+        <button id="back-button" class="login-form-button navigation-login-form-button" (click)="back.emit()">
+            &lt;
+        </button> <br>
+        <input [(ngModel)]="username" [ngModelOptions]="{standalone: true}" placeholder="username">
+        <br>
+        <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" placeholder="password" type="password">
+        <br>
+        <button id="login-button" class="login-form-button" (click)="clearLoginFields()">Login</button>
+        <div *ngIf="displayError" class="failed-login">
+            <p>The entered credentials don't match to any account.</p>
+            <p>Please, try again.</p>
+        </div>
+    </form>
+</div>

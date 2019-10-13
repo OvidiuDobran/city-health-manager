@@ -1,0 +1,10 @@
+<div>
+    <form>
+        <button *ngIf="cities && cities.length!=0" id="next-button"
+            class="login-form-button navigation-login-form-button" (click)="retrieveSelectedCity()">></button>
+        <br>
+        <select (change)="onOptionSelect($event)">
+            <option *ngFor="let city of cities" value={{city.name}}>{{city.name}}, {{city.country}}</option>
+        </select>
+    </form>
+</div>

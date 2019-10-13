@@ -1,0 +1,30 @@
+.header {
+  background-color: black;
+  color: white;
+  position: relative;
+  margin-top: -0.6%;
+  margin-left: -0.6%;
+  margin-right: -0.5%;
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+#user {
+  margin-left: 92%
+}
+
+#menu {
+  background-color: gray;
+  position: relative;
+  right: 0.5em;
+}
+
+#menu, #view {
+  float: left;
+}
+
+.menu-item {
+  margin-top: 5%;
+  margin-bottom: 1%;
+  list-style-type: none;
+}
