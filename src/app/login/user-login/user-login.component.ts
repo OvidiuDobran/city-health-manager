@@ -7,8 +7,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class UserLoginComponent implements OnInit {
 
-  @Input() username: String;
-  @Input() password: String;
+  @Input() username: string;
+  @Input() password: string;
   @Input() displayError: boolean;
   @Output() login = new EventEmitter();
   @Output() back = new EventEmitter();
@@ -21,7 +21,7 @@ export class UserLoginComponent implements OnInit {
   clearLoginFields() {
     const usernameCopy = this.username.slice();
     const passwordCopy = this.password.slice();
-    this.username = this.password = "";
+    this.username = this.password = '';
     this.login.emit({
       username: usernameCopy,
       password: passwordCopy

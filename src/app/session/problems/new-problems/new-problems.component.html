@@ -1,0 +1,14 @@
+<table class="table table-hover problems-table">
+  <thead class="thead-dark">
+    <tr>
+      <th>Reported at</th>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let problem of problems" [routerLink]="['../', { outlets: { working_area: ['problem', problem.id] } }]">
+      <td>{{ problem.createdAt | date:'LLL dd, y HH:mm' }}</td>
+      <td>{{ problem.title }}</td>
+    </tr>
+  </tbody>
+</table>

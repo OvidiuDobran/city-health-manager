@@ -1,0 +1,27 @@
+<div class="container-fluid background">
+  <div class="row d-flex justify-content-center">
+    <div class="card-columns mt-5 ml-5">
+      <app-tile
+        [routerLink]="['/session', { outlets: { view: ['problems'] } }]"
+        title="Manage the problems"
+        imagePath="assets/img/tile-problems.PNG"
+        description="Manage the status of the existing problems. View the solved problems"
+      >
+      </app-tile>
+
+      <app-tile
+        [routerLink]="['/session', { outlets: { view: ['city'] } }]"
+        title="City status"
+        imagePath="assets/img/tile-city-status.PNG"
+        description="See the ranking of your city based on the reported and the solved problems."
+      ></app-tile>
+
+      <app-tile
+        [routerLink]="['/session', { outlets: { view: ['city'] } }]"
+        title="Define rewards"
+        imagePath="assets/img/tile-rewards.PNG"
+        description="Create new rewards to motivate the citizens in your city to report the existing problems."
+      ></app-tile>
+    </div>
+  </div>
+</div>

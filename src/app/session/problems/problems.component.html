@@ -1,0 +1,18 @@
+<div class="row no-gutters full-view">
+  <div class="col-sm-2 bg-light ">
+    <div class="nav flex-column nav-pills nav-fill" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <a class="nav-link" data-toggle="pill" role="tab"
+        [routerLink]="['.', { outlets: { working_area: ['new_problems'] } }]">New Problems</a>
+      <a class="nav-link" data-toggle="pill" role="tab"
+        [routerLink]="['.', { outlets: { working_area: ['assigned_problems'] } }]">Assigned Problems</a>
+      <a class="nav-link" data-toggle="pill" role="tab"
+        [routerLink]="['.', { outlets: { working_area: ['solved_problems'] } }]">Solved Problems</a>
+    </div>
+  </div>
+
+  <div class="col-sm">
+    <div class="tab-content" id="v-pills-tabContent">
+      <router-outlet name="working_area"></router-outlet>
+    </div>
+  </div>
+</div>

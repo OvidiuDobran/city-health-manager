@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  username: String;
-  password: String;
+  username: string;
+  password: string;
 
   cities: City[];
   selectedCity: City;
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     this.loginFailed = !clerkUser;
     if (!this.loginFailed) {
       this.sessionService.clerkUser = clerkUser;
-      this.router.navigateByUrl('/home');
+      this.router.navigate(['/session', { outlets: { view: ['home'] } }]);
     }
   }
 
@@ -46,6 +46,10 @@ export class LoginComponent implements OnInit {
   doBack() {
     this.loginFormIndex = 0;
     this.loginFailed = false;
+  }
+
+  firstPageActive() {
+    return this.loginFormIndex === 0;
   }
 
 

@@ -1,16 +1,27 @@
 <div>
-    <form>
-        <button id="back-button" class="login-form-button navigation-login-form-button" (click)="back.emit()">
-            &lt;
-        </button> <br>
-        <input [(ngModel)]="username" [ngModelOptions]="{standalone: true}" placeholder="username">
-        <br>
-        <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" placeholder="password" type="password">
-        <br>
-        <button id="login-button" class="login-form-button" (click)="clearLoginFields()">Login</button>
-        <div *ngIf="displayError" class="failed-login">
-            <p>The entered credentials don't match to any account.</p>
-            <p>Please, try again.</p>
-        </div>
-    </form>
+  <div class="form-group">
+    <button id="back-button" class="btn btn-primary" (click)="back.emit()">
+      <fa-icon icon="angle-left"></fa-icon>
+      Back
+    </button>
+  </div>
+
+  <div class="form-group">
+    <input [(ngModel)]="username" [ngModelOptions]="{standalone: true}" placeholder="username"
+      class="form-control text-dark">
+  </div>
+
+  <div class="form-group">
+    <input [(ngModel)]="password" [ngModelOptions]="{standalone: true}" placeholder="password" type="password"
+      class="form-control text-dark">
+  </div>
+
+  <div class="form-group"><button class="btn btn-primary btn-block " (click)="clearLoginFields()">Login</button>
+  </div>
+  <div class="form-group">
+    <div *ngIf="displayError" class="alert alert-danger">
+      <small>The entered credentials don't match to any account. <strong>Please, try again.</strong></small>
+    </div>
+  </div>
+
 </div>

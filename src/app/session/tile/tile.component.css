@@ -1,0 +1,7 @@
+.app-tile {
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: 2px 2px 5px gray;
+}

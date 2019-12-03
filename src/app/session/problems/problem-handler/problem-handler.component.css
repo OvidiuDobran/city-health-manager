@@ -1,0 +1,16 @@
+agm-map {
+  height: 300px;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 13%;
+}
+
+.container.border.rounded {
+  height: 87%;
+}

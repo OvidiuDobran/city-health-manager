@@ -1,10 +1,16 @@
 <div>
-    <form>
-        <button *ngIf="cities && cities.length!=0" id="next-button"
-            class="login-form-button navigation-login-form-button" (click)="retrieveSelectedCity()">></button>
-        <br>
-        <select (change)="onOptionSelect($event)">
-            <option *ngFor="let city of cities" value={{city.name}}>{{city.name}}, {{city.country}}</option>
-        </select>
-    </form>
+  <div class="form-group d-flex flex-row-reverse">
+    <button *ngIf="cities && cities.length!=0 && selectedCityIndex>=0" id="next-button" class="btn btn-primary"
+      (click)="retrieveSelectedCity()">
+      Next
+      <fa-icon icon="angle-right"></fa-icon>
+    </button>
+  </div>
+
+  <div class="form-group">
+    <label class="pb-3 text-white">Choose a city:</label>
+    <select class="form-control text-dark" (change)="onOptionSelect($event)">
+      <option *ngFor="let city of cities" value={{city.name}}>{{city.name}}, {{city.country}}</option>
+    </select>
+  </div>
 </div>
