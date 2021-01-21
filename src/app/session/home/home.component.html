@@ -1,26 +1,39 @@
 <div class="container-fluid background">
-  <div class="row d-flex justify-content-center">
-    <div class="card-columns mt-5 ml-5">
+  <div class="row d-flex justify-content-center mt-5">
+    <div class="mb-3 ml-5 mr-5">
       <app-tile
         [routerLink]="['/session', { outlets: { view: ['problems'] } }]"
-        title="Manage the problems"
+        title="Problems handler"
         imagePath="assets/img/tile-problems.PNG"
-        description="Manage the status of the existing problems. View the solved problems"
+        description="Manage the status of the problems reported in your city"
       >
       </app-tile>
+    </div>
 
+    <div class="mb-3 ml-5 mr-5">
       <app-tile
-        [routerLink]="['/session', { outlets: { view: ['city'] } }]"
-        title="City status"
-        imagePath="assets/img/tile-city-status.PNG"
-        description="See the ranking of your city based on the reported and the solved problems."
+        [routerLink]="['/session', { outlets: { view: ['ranking'] } }]"
+        title="Ranking"
+        imagePath="assets/img/tile-ranking.jpg"
+        description="See how your city is doing compared to other cities using αρρσℓιѕ"
       ></app-tile>
+    </div>
 
+    <div class="mb-3 ml-5 mr-5">
       <app-tile
-        [routerLink]="['/session', { outlets: { view: ['city'] } }]"
-        title="Define rewards"
-        imagePath="assets/img/tile-rewards.PNG"
-        description="Create new rewards to motivate the citizens in your city to report the existing problems."
+        [routerLink]="['/session', { outlets: { view: ['rewards'] } }]"
+        title="Rewards"
+        imagePath="assets/img/tile-rewards.jpg"
+        description="Create new rewards to motivate the citizens in your city to report new problems"
+      ></app-tile>
+    </div>
+
+    <div class="mb-3 ml-5 mr-5">
+      <app-tile
+        [routerLink]="['/session', { outlets: { view: ['news'] } }]"
+        title="News"
+        imagePath="assets/img/tile-news.jpg"
+        description="Let the citizens know what's new in your city"
       ></app-tile>
     </div>
   </div>

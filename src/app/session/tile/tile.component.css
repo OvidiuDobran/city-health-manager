@@ -5,3 +5,7 @@
 .card:hover {
   box-shadow: 2px 2px 5px gray;
 }
+
+.bg-persian-blue {
+  background-color: rgb(43, 55, 226);
+}

@@ -1,19 +1,18 @@
 import { City } from './city';
 
 export class ClerkUser {
-    firstName: String;
-    lastName: String;
-    email: String;
-    password: String;
+    [x: string]: any;
+    firstName: string;
+    lastName: string;
+    email: string;
     city: City;
+    token: string;
 
-    constructor(firstName: String, lastName: String, email: String, password: String, city: City) {
+    constructor({ firstName, lastName, email, city, token }) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.password = password;
         this.city = city;
+        this.token = token;
     }
-
-
 }

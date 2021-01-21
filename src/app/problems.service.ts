@@ -1,57 +1,84 @@
 import { Injectable } from '@angular/core';
-import { PROBLEMS } from './data/mock-problems';
 import { Problem } from './data/problem';
-import { Status } from './data/status';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
+import { SessionService } from './session.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ProblemsService {
+    constructor(private httpClient: HttpClient, private sessionService: SessionService) {}
 
-  problems: Problem[];
-
-  getNewProblems(): Problem[] {
-    return this.getAllProblems().filter(
-      problem => problem.status === Status.NEW
-    );
-  }
-
-  getAssignedProblems(): Problem[] {
-    return this.getAllProblems().filter(
-      problem => problem.status === Status.ASSIGNED
-    );
-  }
-
-  getSolvedProblems(): Problem[] {
-    return this.getAllProblems().filter(
-      problem => problem.status === Status.SOLVED
-    );
-  }
-
-  getProblem(id: number) {
-    return this.getAllProblems().find(problem => problem.id === id);
-  }
-
-  constructor() {}
-
-  getAllProblems() {
-    if (!this.problems || this.problems.length === 0) {
-      this.problems = PROBLEMS.map(
-        p =>
-          new Problem(
-            p.id,
-            p.title,
-            p.longitude,
-            p.latitude,
-            p.description,
-            p.city,
-            p.createdAt,
-            p.status,
-            p.assignedAt,
-            p.solvedAt
-          )
-      );
+    getProblem(id: number): Observable<Problem> {
+        const url = 'http://localhost:8080/problem/' + id;
+        return this.httpClient.get<Problem>(url);
     }
-    return this.problems;
-  }
+
+    getProblemsByStatus(status: string): Problem[] {
+        const problems: Problem[] = [];
+        const url =
+            'http://localhost:8080/problem/all?status=' +
+            status +
+            '&cityName=' +
+            this.sessionService.clerkUser.city.name +
+            '&countryName=' +
+            this.sessionService.clerkUser.city.country.name;
+        this.httpClient.get(url).subscribe(
+            (res) => {
+                const response = res as any[];
+                response.forEach((element) => {
+                    problems.push(new Problem(element));
+                });
+            },
+            (err) => alert('An error has occurred while getting cities')
+        );
+        return problems;
+    }
+
+    updateProblemStatus(problemId: number, status: string): Observable<Problem> {
+        const url =
+            'http://localhost:8080/problem/status?problemId=' +
+            problemId +
+            '&statusName=' +
+            status +
+            '&clerkEmail=' +
+            this.sessionService.clerkUser.email;
+
+        return this.httpClient.post<Problem>(
+            url,
+            {},
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json'
+                })
+            }
+        );
+    }
+
+    getFile(fileName: string): Observable<any> {
+        return this.httpClient.get('http://localhost:8080/problem/download/image/' + fileName, {
+            responseType: 'blob'
+        });
+    }
+
+    addComment(problemId: number, comment: string): Observable<Problem> {
+        const url =
+            'http://localhost:8080/problem/comment?problemId=' +
+            problemId +
+            '&comment=' +
+            comment +
+            '&clerkEmail=' +
+            this.sessionService.clerkUser.email;
+
+        return this.httpClient.post<Problem>(
+            url,
+            {},
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json'
+                })
+            }
+        );
+    }
 }

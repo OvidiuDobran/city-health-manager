@@ -1,0 +1,72 @@
+<div class="article-container background">
+  <div class="d-inline-block shadow w-60 h-100 rounded bg-light mt-2">
+    <div class="article-header bg-persian-blue">
+      <p *ngIf="!article" class="font-weight-bold">
+        Create a new article
+      </p>
+      <p *ngIf="article" class="font-weight-bold">
+        Update article
+      </p>
+    </div>
+    <div class="article-body">
+      <form>
+        <div class="form-group row mx-5 mt-4">
+          <label for="title" class="col-sm-2 col-form-label">Title</label>
+          <div class="col-sm-8">
+            <textarea
+              name="title"
+              [(ngModel)]="title"
+              class="form-control"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+        <div class="form-group row mx-5">
+          <label for="staticEmail" class="col-sm-2 col-form-label"
+            >Content</label
+          >
+          <div class="col-sm-9">
+            <textarea
+              name="content"
+              [(ngModel)]="content"
+              class="form-control"
+              rows="12"
+            ></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <hr />
+
+    <div
+      *ngIf="article; else noArticle"
+      class="d-flex flex-row justify-content-around"
+    >
+      <span class="w-75">
+        <button
+          (click)="onSave()"
+          class="btn btn-success btn-lg btn-block w-25 border-darker-success"
+        >
+          Save
+        </button>
+      </span>
+      <button
+        (click)="onDelete()"
+        class="btn btn-outline-danger btn-lg btn-block w-10 border-darker-danger"
+      >
+        <fa-icon icon="trash"></fa-icon>
+      </button>
+    </div>
+
+    <ng-template #noArticle>
+      <div class="d-flex flex-row justify-content-around">
+        <button
+          (click)="onSave()"
+          class="btn btn-success btn-lg btn-block w-25 border-darker-success"
+        >
+          Save
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</div>

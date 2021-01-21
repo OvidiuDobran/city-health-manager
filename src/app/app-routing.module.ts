@@ -4,54 +4,46 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './session/home/home.component';
 import { ProblemsComponent } from './session/problems/problems.component';
 import { SessionComponent } from './session/session.component';
-import { CityStatusComponent } from './session/city-status/city-status.component';
-import { NewProblemsComponent } from './session/problems/new-problems/new-problems.component';
 import { ProblemHandlerComponent } from './session/problems/problem-handler/problem-handler.component';
-import { AssignedProblemsComponent } from './session/problems/assigned-problems/assigned-problems.component';
-import { SolvedProblemsComponent } from './session/problems/solved-problems/solved-problems.component';
+import { RewardsComponent } from './session/rewards/rewards.component';
+import { RewardDefinitionComponent } from './session/rewards/reward-definition/reward-definition.component';
+import { CitiesRankingComponent } from './session/cities-ranking/cities-ranking.component';
+import { NewsComponent } from './session/news/news.component';
+import { NewsArticleDefinitionComponent } from './session/news/news-article-definition/news-article-definition.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  {
-    path: 'session',
-    component: SessionComponent,
-    children: [
-      { path: 'home', component: HomeComponent, outlet: 'view' },
-      {
-        path: 'problems',
-        component: ProblemsComponent,
-        outlet: 'view',
+    { path: '', component: LoginComponent },
+    // { path: '', redirectTo: '/login', pathMatch: 'full' },
+    {
+        path: 'session',
+        component: SessionComponent,
         children: [
-          {
-            path: 'new_problems',
-            component: NewProblemsComponent,
-            outlet: 'working_area'
-          },
-          {
-            path: 'assigned_problems',
-            component: AssignedProblemsComponent,
-            outlet: 'working_area'
-          },
-          {
-            path: 'solved_problems',
-            component: SolvedProblemsComponent,
-            outlet: 'working_area'
-          },
-          {
-            path: 'problem/:id',
-            component: ProblemHandlerComponent,
-            outlet: 'working_area'
-          }
+            { path: 'home', component: HomeComponent, outlet: 'view' },
+            {
+                path: 'problems',
+                component: ProblemsComponent,
+                outlet: 'view',
+                children: [
+                    {
+                        path: 'problem/:id',
+                        component: ProblemHandlerComponent,
+                        outlet: 'working_area'
+                    }
+                ]
+            },
+            { path: 'ranking', component: CitiesRankingComponent, outlet: 'view' },
+            { path: 'rewards', component: RewardsComponent, outlet: 'view' },
+            { path: 'new_reward', component: RewardDefinitionComponent, outlet: 'view' },
+            { path: 'reward_update/:id', component: RewardDefinitionComponent, outlet: 'view' },
+            { path: 'news', component: NewsComponent, outlet: 'view' },
+            { path: 'new_article', component: NewsArticleDefinitionComponent, outlet: 'view' },
+            { path: 'article_update/:id', component: NewsArticleDefinitionComponent, outlet: 'view' }
         ]
-      },
-      { path: 'city', component: CityStatusComponent, outlet: 'view' }
-    ]
-  }
+    }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [ RouterModule.forRoot(routes) ],
+    exports: [ RouterModule ]
 })
 export class AppRoutingModule {}

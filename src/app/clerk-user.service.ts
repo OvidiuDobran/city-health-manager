@@ -1,22 +1,34 @@
 import { Injectable } from '@angular/core';
-import { CLERK_USERS } from './data/mock-clerk-users';
 import { City } from './data/city';
-import deepEqual from 'deep-equal';
 import { ClerkUser } from './data/clerk-user';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ClerkUserService {
+    constructor(private httpClient: HttpClient) {}
 
-  constructor() { }
+    async getClerkUser(email: string, password: string, city: City): Promise<ClerkUser> {
+        const httpOptions = {
+            headers: {
+                'Content-Type': 'application/json',
+                skip: 'true'
+            }
+        };
+        httpOptions.headers.skip = 'true';
+        const url = 'http://localhost:8080/session/login/clerk';
+        const response = await this.httpClient
+            .post(url, { email, password, cityName: city.name, countryName: city.country }, httpOptions)
+            .toPromise();
+        const clerk = new ClerkUser(response as ClerkUser);
+        console.log('Clerk: ' + JSON.stringify(clerk));
+        return clerk;
+    }
 
-  getClerkUsers(): ClerkUser[] {
-    return CLERK_USERS.map(clerk => new ClerkUser(clerk.firstName, clerk.lastName, clerk.email, clerk.password, clerk.city));
-  }
-
-  getClerkUser(email: string, password: string, city: City): ClerkUser {
-    return this.getClerkUsers().find(clerk => clerk.email === email && clerk.password === password && deepEqual(clerk.city, city));
-  }
+    getClerk(email: string): Observable<ClerkUser> {
+        const url = 'http://localhost:8080/clerk/' + email;
+        return this.httpClient.get<ClerkUser>(url);
+    }
 }

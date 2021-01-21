@@ -1,0 +1,48 @@
+<div class="ranking-container city-ranking-background overflow-auto">
+  <div class="d-inline-block shadow w-25 h-90 rounded bg-white mt-100px">
+    <div *ngIf="cityStatus" class="city-status">
+      <div class="city-status-header bg-dark">
+        <p class="city-status-title">Statistics</p>
+      </div>
+
+      <div style="display: block;">
+        <canvas
+          baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"
+          (chartHover)="chartHovered($event)"
+          (chartClick)="chartClicked($event)"
+          [colors]="colors"
+        ></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="d-inline-block shadow w-25 rounded mt-5">
+    <table class="table table-striped table-light">
+      <thead class="thead-dark">
+        <th>
+          #
+        </th>
+        <th>
+          City
+        </th>
+        <th>
+          Rank
+        </th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cityRank of ranking; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ cityRank.city.name }}</td>
+          <td>
+            <span>
+              <fa-icon icon="star" style="color: rgb(255, 211, 68);"></fa-icon>
+            </span>
+            {{ cityRank.rank | number: "1.1-1" }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

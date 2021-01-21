@@ -1,0 +1,8 @@
+<fa-icon
+  *ngFor="let item of array(5); let i = index"
+  icon="star"
+  [ngClass]="{
+    'filled-star': i + 1 <= rating,
+    'empty-star': i + 1 > rating
+  }"
+></fa-icon>

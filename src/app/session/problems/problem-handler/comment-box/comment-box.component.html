@@ -1,0 +1,16 @@
+<div class="history-container ml-3 mb-4 ">
+  <h5>Comment</h5>
+  <div class="container border rounded mt-3 p-2 shadow-sm d-inline-block bg-white">
+    <textarea
+      name="comment"
+      [(ngModel)]="comment"
+      class="form-control m-3 w-95"
+    ></textarea>
+    <button
+      (click)="onAddComment()"
+      class="btn btn-primary border-darker-primary"
+    >
+      Add comment
+    </button>
+  </div>
+</div>

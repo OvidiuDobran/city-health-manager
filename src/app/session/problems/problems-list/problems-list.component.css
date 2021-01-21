@@ -1,0 +1,8 @@
+.thead-gradient-color {
+  background-image: linear-gradient(to bottom, rgb(46, 45, 45), rgb(107, 107, 107));
+  color: white;
+}
+
+tr:hover {
+  cursor: pointer
+}

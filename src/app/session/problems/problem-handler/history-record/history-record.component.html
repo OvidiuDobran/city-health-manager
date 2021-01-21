@@ -1,0 +1,48 @@
+<div class="container border border-dark m-3 p-2 history-record shadow-sm w-95">
+  <div class="d-flex flex-row justify-content-between">
+    <div>
+      {{ currentHistory.creationDate | date: "LLL dd, y HH:mm" }}
+    </div>
+
+    <div class>
+      <span *ngIf="currentHistory.changeType === changeTypes.STATUS">
+        <span
+          [ngClass]="{
+            badge: true,
+            'badge-primary': status.NEW === previousHistory.status,
+            'badge-warning': status.IN_PROGRESS === previousHistory.status,
+            'badge-info': status.RESOLVED === previousHistory.status,
+            'badge-success': status.CLOSED === previousHistory.status,
+            'badge-danger': status.REJECTED === previousHistory.status
+          }"
+          >{{ previousHistory.status }}
+        </span>
+        <fa-icon icon="long-arrow-alt-right"></fa-icon>
+      </span>
+      <span
+        [ngClass]="{
+          badge: true,
+          'badge-primary': status.NEW === currentHistory.status,
+          'badge-warning': status.IN_PROGRESS === currentHistory.status,
+          'badge-info': status.RESOLVED === currentHistory.status,
+          'badge-success': status.CLOSED === currentHistory.status,
+          'badge-danger': status.REJECTED === currentHistory.status
+        }"
+        >{{ currentHistory.status }}
+      </span>
+    </div>
+  </div>
+
+  <hr />
+
+  <div *ngIf="clerk">
+    {{ clerk.firstName }} {{ clerk.lastName }}
+    <small class="font-italic text-secondary">{{ clerk.email }}</small>
+  </div>
+  <div *ngIf="currentHistory.changeType == changeTypes.COMMENT">
+    <p class="font-italic text-secondary">'{{ currentHistory.comment }}'</p>
+  </div>
+  <div *ngIf="status.CLOSED === currentHistory.status">
+    <app-rating-bar [rating]="rating"></app-rating-bar>
+  </div>
+</div>

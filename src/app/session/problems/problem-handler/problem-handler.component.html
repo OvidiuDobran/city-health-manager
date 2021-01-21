@@ -2,63 +2,94 @@
   No problem with this id.
 </div>
 
-<div *ngIf="problem">
+<div *ngIf="problem" class="overflow-auto">
   <div class="row">
     <div class="col-sm-6">
       <div
         class="container border rounded mt-3 ml-3 p-2 shadow-sm d-inline-block"
       >
-        <div class=" row">
+        <div class="row mx-1 border-bottom border-light">
           <div class="col-sm-3">
-            <label>Title:</label>
+            <label class="font-weight-bold">Category</label>
           </div>
           <div class="col-sm">
-            <p>{{ problem.title }}</p>
+            <p>{{ problem.category }}</p>
           </div>
         </div>
-        <div class="row">
+        <div class="row mx-1 border-bottom border-light">
           <div class="col-sm-3">
-            <label>Reported At:</label>
+            <label class="font-weight-bold">Address</label>
           </div>
           <div class="col-sm">
-            <p>{{ problem.createdAt | date: "LLL dd, y HH:mm" }}</p>
+            <p>{{ problem.address }}</p>
           </div>
         </div>
-        <div *ngIf="problem.assignetAt" class="row">
+        <div class="row mx-1 border-bottom border-light">
           <div class="col-sm-3">
-            <label>Assigned At:</label>
+            <label class="font-weight-bold">Reported At</label>
           </div>
           <div class="col-sm">
-            <p>{{ problem.assignetAt | date: "LLL dd, y HH:mm" }}</p>
+            <p>{{ getCreationDate(problem) | date: "LLL dd, y HH:mm" }}</p>
           </div>
         </div>
-        <div *ngIf="problem.solvedAt" class="row">
+        <div class="row mx-1 border-bottom border-light">
           <div class="col-sm-3">
-            <label>Solved At:</label>
+            <label class="font-weight-bold">Status</label>
           </div>
+
           <div class="col-sm">
-            <p>{{ problem.solvedAt | date: "LLL dd, y HH:mm" }}</p>
+            <p
+              [ngClass]="{
+                badge: true,
+                'badge-primary': status.NEW === problemStatus,
+                'badge-warning': status.IN_PROGRESS === problemStatus,
+                'badge-info': status.RESOLVED === problemStatus,
+                'badge-success': status.CLOSED === problemStatus,
+                'badge-danger': status.REJECTED === problemStatus
+              }"
+            >
+              {{ problemStatus }}
+            </p>
           </div>
         </div>
-        <div class="row">
+        <div class="row mx-1 border-bottom border-light">
           <div class="col-sm-3">
-            <label>Description:</label>
+            <label class="font-weight-bold">Description</label>
           </div>
           <div class="col-sm">
             <p>{{ problem.description }}</p>
           </div>
         </div>
-        <button
-          *ngIf="getButtonValue()"
-          [ngClass]="getButtonClass()"
-          (click)="onProblemActionClick()"
-        >
-          {{ getButtonValue() }} <fa-icon icon="{{getButtonIcon()}}"></fa-icon>
-        </button>
+        <div class="h-40 d-flex align-items-end pb-3">
+          <button
+            *ngIf="problemStatus === 'NEW'"
+            (click)="onProblemStatusUpdate('IN_PROGRESS')"
+            class="btn btn-warning shadow-sm border-darker-warning w-100px"
+          >
+            Start
+            <fa-icon icon="hammer"></fa-icon>
+          </button>
+          <button
+            *ngIf="problemStatus === 'IN_PROGRESS'"
+            (click)="onProblemStatusUpdate('RESOLVED')"
+            class="btn btn-info border-darker-info w-100px"
+          >
+            Resolve
+            <fa-icon icon="check"></fa-icon>
+          </button>
+          <button
+            *ngIf="problemStatus === 'NEW' || problemStatus === 'IN_PROGRESS'"
+            (click)="onProblemStatusUpdate('REJECTED')"
+            class="btn btn-danger ml-2 shadow-sm border-darker-danger w-100px"
+          >
+            Reject
+            <fa-icon icon="ban"></fa-icon>
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="col-sm mt-3 mr-3">
+    <div class="col-sm mt-3 mr-2">
       <div class="jumbotron p-3">
         <agm-map
           [zoom]="18"
@@ -74,10 +105,39 @@
     </div>
   </div>
 
-  <div>
+  <div class="row">
+    <div class="col-sm">
+      <app-comment-box (addComment)="onAddComment($event)"></app-comment-box>
+      <div class="history-container ml-3 mb-4 pb-5">
+        <h5>History</h5>
+        <div class="container border rounded mt-3 p-2 shadow-sm d-inline-block">
+          <div *ngFor="let history of sortedHistories; let i = index">
+            <app-history-record
+              [currentHistory]="history"
+              [previousHistory]="sortedHistories[i + 1]"
+              [clerk]="contributors.get(history.clerk)"
+              [rating]="problem.rating"
+            ></app-history-record>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="col-sm">
       <h5 class="mt-3">Images</h5>
-      <div class="alert alert-secondary mt-3">No images available.</div>
+      <div class="alert alert-secondary mt-3 mr-2">
+        <div *ngIf="problem.images && problem.images.length > 0; else noImage">
+          <img
+            *ngFor="let image of images; let i = index"
+            id="i"
+            [src]="image"
+            class="thumbnail"
+          />
+        </div>
+        <ng-template #noImage>
+          No images available.
+        </ng-template>
+      </div>
     </div>
   </div>
 </div>

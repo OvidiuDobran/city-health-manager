@@ -1,0 +1,86 @@
+<div class="reward-container background">
+  <div class="d-inline-block shadow w-60 h-90 rounded bg-light">
+    <div class="reward-header bg-persian-blue">
+      <p *ngIf="!reward" class="font-weight-bold">
+        Create a new reward
+      </p>
+      <p *ngIf="reward" class="font-weight-bold">
+        Update reward
+      </p>
+    </div>
+    <div class="reward-body">
+      <form>
+        <div class="form-group row mx-5">
+          <label for="title" class="col-sm-2 col-form-label">Title</label>
+          <div class="col-sm-5">
+            <input
+              name="title"
+              [(ngModel)]="title"
+              type="text"
+              class="form-control"
+              id="title"
+            />
+          </div>
+        </div>
+        <div class="form-group row mx-5">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Cost</label>
+          <div class="col-sm-5">
+            <input
+              name="cost"
+              [(ngModel)]="cost"
+              type="number"
+              min="1"
+              class="form-control"
+              id="staticEmail"
+            />
+          </div>
+        </div>
+        <div class="form-group row mx-5">
+          <label for="staticEmail" class="col-sm-2 col-form-label"
+            >Description</label
+          >
+          <div class="col-sm-9">
+            <textarea
+              name="description"
+              [(ngModel)]="description"
+              class="form-control"
+              rows="7"
+            ></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+    <hr />
+
+    <div
+      *ngIf="reward; else noReward"
+      class="d-flex flex-row justify-content-around"
+    >
+      <span class="w-75">
+        <button
+          (click)="onSave()"
+          class="btn btn-success btn-lg btn-block w-25 border-darker-success"
+        >
+          Save
+        </button>
+      </span>
+      <button
+        (click)="onDelete()"
+        class="btn btn-outline-danger btn-lg btn-block w-10 border-darker-danger"
+      >
+        <fa-icon icon="trash"></fa-icon>
+      </button>
+    </div>
+
+    <ng-template #noReward>
+      <div class="d-flex flex-row justify-content-around">
+        <button
+          (click)="onSave()"
+          class="btn btn-success btn-lg btn-block w-25 border-darker-success"
+        >
+          Save
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</div>

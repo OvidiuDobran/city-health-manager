@@ -1,0 +1,33 @@
+.ranking-container {
+  background-size: cover;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 90%;
+  width: 100%;
+}
+
+.city-status {
+  display: flex;
+  flex-direction: column;
+}
+
+.city-status-header {
+  background-color: rgb(9, 17, 53);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  justify-content: space-evenly;
+}
+
+.city-status-title {
+  color: white;
+  font-size: 25px;
+  align-self: center;
+  font-weight: bold;
+}

@@ -5,17 +5,16 @@ import { ClerkUser } from './data/clerk-user';
 import { ClerkUserService } from './clerk-user.service';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class LoginService {
+    constructor(private geographyService: GeographyService, private clerkUserService: ClerkUserService) {}
 
-  constructor(private geographyService: GeographyService, private clerkUserService: ClerkUserService) { }
+    getCities(): City[] {
+        return this.geographyService.getCities();
+    }
 
-  getCities(): City[] {
-    return this.geographyService.getCities();
-  }
-
-  getClerkUser(email: string, password: string, city: City): ClerkUser {
-    return this.clerkUserService.getClerkUser(email, password, city);
-  }
+    async getClerkUser(email: string, password: string, city: City): Promise<ClerkUser> {
+        return await this.clerkUserService.getClerkUser(email, password, city);
+    }
 }

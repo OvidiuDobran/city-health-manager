@@ -1,9 +1,17 @@
 export class City {
-  name: string;
-  country: string;
+    name: string;
+    country: Country;
 
-  constructor(name: string, country: string) {
-    this.name = name;
-    this.country = country;
-  }
+    constructor(name: string, country: Country) {
+        this.name = name;
+        this.country = country;
+    }
+}
+
+export class Country {
+    name: string;
+
+    constructor(name: string) {
+        this.name = name;
+    }
 }

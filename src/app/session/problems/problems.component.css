@@ -4,4 +4,14 @@
   width: 100%;
 }
 
-
+.menu-item {
+  align-self: center;
+  margin: 8px;
+  height: 45px;
+  width: 85%;
+  border-radius: 10px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  background-color: #0275D8;
+  border: #0275D8;
+  box-shadow: chartreuse;
+}

@@ -2,19 +2,21 @@ import { Injectable } from '@angular/core';
 import { ClerkUser } from './data/clerk-user';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class SessionService {
+    private mClerkUser: ClerkUser;
 
-  private mClerkUser: ClerkUser;
+    constructor() {}
 
-  constructor() { }
+    set clerkUser(clerkUser: ClerkUser) {
+        this.mClerkUser = clerkUser;
+    }
 
-  set clerkUser(clerkUser: ClerkUser) {
-    this.mClerkUser = clerkUser;
-  }
-
-  get clerkUser(): ClerkUser {
-    return this.mClerkUser;
-  }
+    get clerkUser(): ClerkUser {
+        if (!this.mClerkUser) {
+            this.mClerkUser = JSON.parse(localStorage.getItem('currentClerkUser'));
+        }
+        return this.mClerkUser;
+    }
 }

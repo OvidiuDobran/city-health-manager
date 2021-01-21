@@ -1,0 +1,35 @@
+<div class="rewards-container background">
+  <div class="row py-3 w-75">
+    <button
+      class="btn btn-success ml-1 border-darker-success"
+      [routerLink]="['/session', { outlets: { view: ['new_reward'] } }]"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      New Reward
+    </button>
+  </div>
+  <div class="table-responsive w-75 table-light border border-dark">
+    <table class="table table-hover table-striped pb-3 mb-5">
+      <thead class="thead thead-dark">
+        <th class="w-20">Created on</th>
+        <th class="w-30">Author</th>
+        <th class="w-40">Title</th>
+        <th class="w-10">Cost</th>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let reward of rewards"
+          [routerLink]="[
+            '/session',
+            { outlets: { view: ['reward_update', reward.id] } }
+          ]"
+        >
+          <td>{{ reward.creationDate | date: "LLL dd, y HH:mm" }}</td>
+          <td>{{ reward.author.firstName }} {{ reward.author.lastName }}</td>
+          <td>{{ reward.title }}</td>
+          <td>{{ reward.cost }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

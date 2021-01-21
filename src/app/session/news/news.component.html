@@ -1,0 +1,35 @@
+<div class="news-container background">
+  <div class="row py-3 w-75">
+    <button
+      class="btn btn-success ml-1 border-darker-success"
+      [routerLink]="['/session', { outlets: { view: ['new_article'] } }]"
+    >
+      <fa-icon icon="plus"></fa-icon>
+      New Article
+    </button>
+  </div>
+  <div class="table-responsive w-75 table-light border border-dark">
+    <table class="table table-hover table-striped pb-3 mb-5">
+      <thead class="thead thead-dark">
+        <th class="w-20">Created on</th>
+        <th class="w-30">Author</th>
+        <th class="w-40">Title</th>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let newsArticle of news"
+          [routerLink]="[
+            '/session',
+            { outlets: { view: ['article_update', newsArticle.id] } }
+          ]"
+        >
+          <td>{{ newsArticle.creationDate | date: "LLL dd, y HH:mm" }}</td>
+          <td>
+            {{ newsArticle.author.firstName }} {{ newsArticle.author.lastName }}
+          </td>
+          <td>{{ newsArticle.title }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
